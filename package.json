@@ -1,10 +1,13 @@
 {
   "name": "karma-sjs-adapter",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "SJS karma plugin",
   "main": "index.js",
   "peerDependencies": {
     "karma": ">=0.9.6"
+  },
+  "dependencies": {
+    "mime": ">=1.2.0"
   },
   "bin": {
     "karma-sjs": "karma-sjs"

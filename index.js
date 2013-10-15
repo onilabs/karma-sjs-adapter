@@ -1,5 +1,6 @@
 var Path = require('path');
 var fs = require('fs');
+var mime = require('mime');
 
 var init = function(logger, customFileHandlers, files, client) {
   var log = logger.create('sjs-adapter');
@@ -57,9 +58,7 @@ var init = function(logger, customFileHandlers, files, client) {
         return serve404(response, path);
       }
 
-      // TODO: use `mime` if we ever need it
-      response.setHeader('Content-Type', 'text/plain');
-
+      response.setHeader('Content-Type', mime.lookup(path));
       response.setHeader('Cache-Control', 'no-store');
       response.setHeader('Expires', '-1');
 
