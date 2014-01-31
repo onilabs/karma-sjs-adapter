@@ -4,16 +4,6 @@ var str = require('sjs:string');
 var path = require('nodejs:path');
 var fs = require('sjs:nodejs/fs');
 
-var karmaPath = require.resolve('nodejs:karma').path;
-if (karmaPath === 'karma') throw new Error("Can't find `karma` nodejs module");
-var karmaBase = path.normalize(path.join(karmaPath, '../../'));
-var karmaBin = path.join(karmaBase, 'bin/karma');
-
-if (!fs.exists(karmaBin)) {
-  console.error("ERROR: No `karma` binary at #{karmaBin}");
-  process.exit(1);
-}
-
 // ------------------
 // run karma
 
@@ -33,9 +23,8 @@ exports.run = function(args) {
   } else {
     process.argv = process.argv.slice(0, 2).concat(args);
   }
-  var loader = (require.hubs .. seq.find(h -> h[0] == 'nodejs:'))[1].loader;
-  if(!loader) throw new Error("Can't find nodejs require() loader");
-  require(karmaBin, {loader: loader});
+  // `karma` is the main karma module, but karma/bin/karma is the actual CLI script
+  require('nodejs:karma/bin/karma');
 };
 
 if (require.main === module) {
