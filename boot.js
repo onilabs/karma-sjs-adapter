@@ -49,6 +49,11 @@
         require.hubs.unshift([k, hubs[k]]);
       }
 
+      if (suitePath.indexOf(':') == -1 && suitePath.charAt(0) !== '/') {
+        // take relative to cwd (served by karma-sjs-adapter)
+        suitePath = '/__sjs/' + suitePath;
+      }
+
       require(suitePath,
         { main: true,
           callback: function(err, val) {
