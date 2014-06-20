@@ -55,6 +55,7 @@ var init = function(logger, customFileHandlers, files, client) {
 
     return fs.readFile(path, function(error, data) {
       if (error) {
+        log.debug("Error reading path " + path + ": " + error);
         return serve404(response, path);
       }
 
